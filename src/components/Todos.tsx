@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
+import Todo from "./Todo";
 
 const Todos = () => {
   const [todos, setTodos] = useState([]);
@@ -32,11 +33,11 @@ const Todos = () => {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            { todos.length > 0 ? todos.map((todo: Todos) => (
-
-              <p key={todo.id}><b>{todo.title}</b></p>
-
-            )): (<Loader />)}
+            {todos.length > 0 ? (
+              todos.map((todo: Todos) => <Todo todo={todo} props1 props2 key={todo.id} />)
+            ) : (
+              <Loader />
+            )}
           </div>
         </div>
       </div>
