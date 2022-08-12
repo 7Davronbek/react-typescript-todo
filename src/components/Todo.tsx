@@ -3,16 +3,36 @@ import { TodoType } from "../types/Todo.types";
 
 interface Props {
   todo: TodoType;
-  props1: true;
-  props2: true;
+  index: number;
+  handleCompleted: (id: number) => void;
+  handleDelete: (id: number) => void;
 }
 
-const Todo: React.FC<Props> = ({ todo, props1, props2 }) => {
+const Todo: React.FC<Props> = ({ todo, index, handleCompleted, handleDelete }) => {
   return (
     <div className="Todo">
-      <p>
-        <b>{todo.title}</b>
-      </p>
+      <div className="col-lg-4 mb-4 mx-auto">
+        <div className="cards">
+          <p style={{ textDecoration: todo.completed ? "line-through" : "" }}>
+            {todo.title}
+          </p>
+          <button
+            onClick={() => handleCompleted(index)}
+            className={`btn ms-auto d-block ${
+              todo.completed ? "btn-success" : "btn-dark"
+            }`}
+          >
+            {todo.completed ? "Complete" : "Incomplete"}
+          </button>
+
+          <button
+            onClick={() => handleDelete(index)}
+            className={`btn ms-auto d-block btn-danger mt-2`}
+          >
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

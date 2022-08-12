@@ -4,14 +4,26 @@ import Loader from "./Loader";
 import Todo from "./Todo";
 
 const Todos = () => {
-  const [todos, setTodos] = useState([]);
-  const [error, setError] = useState({});
+  const [todos, setTodos] = useState<Todos[]>([]);
+  //   const [error, setError] = useState({});
 
   interface Todos {
     title: string;
     id: number;
     completed: boolean;
   }
+
+  const handleCompleted = (index: number) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = !newTodos[index].completed;
+    setTodos(newTodos);
+  };
+
+  const handleDelete = (index: number) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,13 +44,19 @@ const Todos = () => {
     <div className="Todos">
       <div className="container">
         <div className="row">
-          <div className="col-12">
-            {todos.length > 0 ? (
-              todos.map((todo: Todos) => <Todo todo={todo} props1 props2 key={todo.id} />)
-            ) : (
-              <Loader />
-            )}
-          </div>
+          {todos.length > 0 ? (
+            todos.map((todo: Todos, index: number) => (
+              <Todo
+                index={index}
+                handleCompleted={handleCompleted}
+                todo={todo}
+                key={todo.id}
+                handleDelete={handleDelete}
+              />
+            ))
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </div>
