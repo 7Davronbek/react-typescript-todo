@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import AddTodo from "./AddTodo";
 import Loader from "./Loader";
 import Todo from "./Todo";
 
@@ -24,6 +25,10 @@ const Todos = () => {
     newTodos.splice(index, 1);
     setTodos(newTodos);
   };
+
+  const handleSubmit = (value: string) => {
+
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +62,7 @@ const Todos = () => {
           ) : (
             <Loader />
           )}
+          <AddTodo handleSubmit={handleSubmit} />
         </div>
       </div>
     </div>
