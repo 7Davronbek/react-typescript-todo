@@ -27,7 +27,7 @@ const Todos = () => {
   };
 
   const handleSubmit = (value: string) => {
-
+      setTodos([...todos, {title: value, id: todos.length + 1, completed: false}])
   }
 
   useEffect(() => {
