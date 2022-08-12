@@ -31,7 +31,7 @@ const Todos = () => {
         const res = await axios.get(
           "https://jsonplaceholder.typicode.com/todos"
         );
-        setTodos(res.data.slice(0, 10));
+        setTodos(res.data.slice(0, 20));
       } catch (err) {
         // setError(err)
         console.log(err);
